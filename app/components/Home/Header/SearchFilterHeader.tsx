@@ -1,8 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Stack, Box } from "@mui/material";
 import { CustomizeSearchFilterIcon } from "../../Custom/CustomizedSearchFilterIcon";
 
-const searchFilters = [
+const initialSearchFilters = [
   { text: "อาคาร", iconPath: "/material/icon/Building.svg" },
   { text: "Co-working space", iconPath: "/material/icon/Meeting_Room.svg" },
   { text: "ร้านอาหาร", iconPath: "/material/icon/Restaurant.svg" },
@@ -11,6 +13,24 @@ const searchFilters = [
 ];
 
 export const SearchFilterHeader = () => {
+  const [searchFilters, setSearchFilters] = useState([...initialSearchFilters]);
+  const [selectedFilter, setSelectedFilter] = useState("");
+
+  const handleFilterClick = (filterText: string) => {
+    setSelectedFilter(filterText);
+
+    const index = searchFilters.findIndex(
+      (filter) => filter.text === filterText
+    );
+
+    if (index > 0) {
+      const newFilters = [...searchFilters];
+      const selectedFilter = newFilters.splice(index, 1)[0];
+      newFilters.unshift(selectedFilter);
+      setSearchFilters(newFilters);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -37,6 +57,8 @@ export const SearchFilterHeader = () => {
             key={filter.text}
             text={filter.text}
             iconPath={filter.iconPath}
+            onClick={() => handleFilterClick(filter.text)}
+            isSelected={selectedFilter === filter.text}
           />
         ))}
       </Stack>
