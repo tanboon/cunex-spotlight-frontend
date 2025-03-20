@@ -1,8 +1,12 @@
+"use client";
+
 import { Box, Typography } from "@mui/material";
 import { ChevronLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const HomeHeader = () => {
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -21,7 +25,7 @@ const HomeHeader = () => {
       }}
     >
       <Box paddingLeft={2}>
-        <ChevronLeft color="#E16385" />
+        <ChevronLeft color="#E16385" onClick={() => router.back()} />
       </Box>
 
       <Box
