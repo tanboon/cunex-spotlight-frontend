@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { Map, useMap, useApiIsLoaded, Marker } from "@vis.gl/react-google-maps";
 import { areas, Location, testAreas } from "./data";
+import CustomizedBottomSheet from "../Custom/CustomizedButtomSheet";
+import ReviewBottomSheet from "../Review/ReviewBottomSheet";
 
 // Map component props
 interface BaseMapProps {
@@ -15,6 +17,7 @@ export const ChulalongKornMap = ({
   defaultCenter = { lat: 13.7392279, lng: 100.5283817 },
   defaultZoom = 16,
 }: BaseMapProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const isLoaded = useApiIsLoaded();
   const map = useMap();
 
@@ -62,11 +65,22 @@ export const ChulalongKornMap = ({
         <Marker
           position={{ lat: 13.7371412, lng: 100.5337339 }}
           title="Marker Title"
+          label={{
+            text: "โรงอาหาร",
+            fontSize: "14px",
+            color: "black",
+          }}
+          icon={{
+            url: "/Material/Icon/canteenMarker.svg",
+            scaledSize: new google.maps.Size(30, 30),
+            anchor: new google.maps.Point(15, 15),
+          }}
           onClick={() => {
-            alert("Marker Clicked");
+            setIsOpen(true);
           }}
         />
       </Map>
+      <ReviewBottomSheet isOpen={isOpen} setIsOpen={setIsOpen} />
     </Box>
   );
 };

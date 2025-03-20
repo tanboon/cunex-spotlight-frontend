@@ -7,3 +7,9 @@
   margin: 0 auto;
   text-align: center;
 }
+
+.custom-label {
+  white-space: nowrap;
+  transform: translateX(-50%); /* Move left but add a small offset */
+  margin-right: 8px; /* Adjust spacing from the marker */
+}
