@@ -1,24 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { Map, useMap, useApiIsLoaded, Marker } from "@vis.gl/react-google-maps";
-import { areas, Location, testAreas } from "./data";
-import CustomizedBottomSheet from "../Custom/CustomizedButtomSheet";
-import ReviewBottomSheet from "../Review/ReviewBottomSheet";
+import { Map, Marker, useApiIsLoaded, useMap } from "@vis.gl/react-google-maps";
+import { useEffect } from "react";
+
+import { areas } from "@/app/constant/area-data";
+import { useBoolean } from "@/app/hooks/use-boolean";
+import { AnimatePresence } from "framer-motion";
+import HomeReviewBottomSheet from "./home-review-bottom-sheet";
+import CustomizedBottomSheet from "@/app/components/customs/customized-buttom-sheet";
 
 // Map component props
-interface BaseMapProps {
-  defaultCenter?: Location;
+type HomeMapProps = {
   defaultZoom?: number;
-}
+};
 
-export const ChulalongKornMap = ({
-  defaultCenter = { lat: 13.7392279, lng: 100.5283817 },
-  defaultZoom = 16,
-}: BaseMapProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const DEFAULT_CENTER = { lat: 13.7392279, lng: 100.5283817 };
+
+function HomeMap({ defaultZoom = 16 }: HomeMapProps) {
+  const isOpen = useBoolean();
+
   const isLoaded = useApiIsLoaded();
+
   const map = useMap();
 
   useEffect(() => {
@@ -54,11 +57,10 @@ export const ChulalongKornMap = ({
   }
 
   return (
-    <Box sx={{ width: "100%", height: "100vh" }}>
+    <Box sx={{ width: 1, height: "100vh", zIndex: 1 }}>
       <Map
-        styles={mapStyles}
         defaultZoom={defaultZoom}
-        defaultCenter={defaultCenter}
+        defaultCenter={DEFAULT_CENTER}
         disableDefaultUI={true}
         gestureHandling="greedy"
       >
@@ -68,21 +70,30 @@ export const ChulalongKornMap = ({
           label={{
             text: "โรงอาหาร",
             fontSize: "14px",
+            fontFamily: " 'Noto Sans Thai', sans-serif",
             color: "black",
           }}
           icon={{
             url: "/Material/Icon/canteenMarker.svg",
             scaledSize: new google.maps.Size(30, 30),
             anchor: new google.maps.Point(15, 15),
+            labelOrigin: new google.maps.Point(15, 37),
           }}
-          onClick={() => {
-            setIsOpen(true);
-          }}
+          onClick={isOpen.onTrue}
         />
       </Map>
-      <ReviewBottomSheet isOpen={isOpen} setIsOpen={setIsOpen} />
+
+      <AnimatePresence>
+        <CustomizedBottomSheet
+          key={String(isOpen.value)}
+          isOpen={isOpen.value}
+          setIsOpen={isOpen.setValue}
+        >
+          <HomeReviewBottomSheet />
+        </CustomizedBottomSheet>
+      </AnimatePresence>
     </Box>
   );
-};
+}
 
-export const mapStyles = [];
+export default HomeMap;

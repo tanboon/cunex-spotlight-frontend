@@ -1,89 +1,42 @@
 "use client";
 
+import ControlledTextField from "@/app/components/controllers/controlled-text-field";
 import { reviewSchema, reviewValidation } from "@/app/schema/reviewSchema";
 import { IReview } from "@/app/types/review";
-import {
-  Avatar,
-  Box,
-  Button,
-  ButtonProps,
-  Rating,
-  styled,
-  Typography,
-} from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useParams } from "next/navigation";
-import { useForm } from "react-hook-form";
 import AddIcon from "@mui/icons-material/Add";
-import ControlledTextField from "@/app/components/Controller/ControlledTextField";
+import { Avatar, Stack, Typography } from "@mui/material";
 
-const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-  color: "#FFFFFF",
-  backgroundColor: "#E26385",
-  "&:hover": {
-    backgroundColor: "#E26385",
-  },
-}));
-
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
+import { useForm } from "react-hook-form";
+import { StyledColorButton, StyledVisuallyHiddenInput } from "../style";
 
 export default function Page() {
-  const { control, setValue } = useForm<IReview>({
+  const { control } = useForm<IReview>({
     defaultValues: reviewSchema,
     resolver: yupResolver(reviewValidation),
     mode: "onChange",
   });
 
-  const params = useParams();
   return (
-    <Box
+    <Stack
       sx={{
-        display: "flex",
-        flexDirection: "column",
         justifyContent: "space-between",
-        width: "100%",
         height: "100vh",
         paddingTop: "112px",
         paddingBottom: "28px",
         paddingX: 2,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          alignItems: "start",
-          gap: "10px",
-        }}
-      >
-        <Box
+      <Stack spacing={1.25}>
+        <Stack
+          spacing={6 / 8}
           sx={{
-            display: "flex",
-            flexDirection: "column",
             marginY: "6px",
-            gap: "6px",
           }}
         >
-          <Box sx={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+          <Stack direction={"row"} spacing={1}>
             <Avatar sx={{ width: "35px", height: "35px" }} />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-              }}
-            >
+            <Stack>
               <Typography sx={{ fontSize: "14px", fontWeight: 400 }}>
                 นายสมชาย ใจดี
               </Typography>
@@ -97,14 +50,12 @@ export default function Page() {
               >
                 Student
               </Typography>
-            </Box>
-          </Box>
-        </Box>
+            </Stack>
+          </Stack>
+        </Stack>
 
-        <Box
+        <Stack
           sx={{
-            display: "flex",
-            width: "100%",
             height: "160px",
             marginTop: "10px",
           }}
@@ -125,8 +76,8 @@ export default function Page() {
               style: { padding: "10px" },
             }}
           />
-        </Box>
-        <ColorButton
+        </Stack>
+        <StyledColorButton
           fullWidth
           variant="contained"
           component="label"
@@ -134,14 +85,14 @@ export default function Page() {
           startIcon={<AddIcon sx={{ width: "15px", height: "15px" }} />}
         >
           เพิ่มรูปภาพ
-          <VisuallyHiddenInput
+          <StyledVisuallyHiddenInput
             type="file"
             onChange={(event) => console.log(event.target.files)}
             multiple
           />
-        </ColorButton>
-      </Box>
-      <ColorButton
+        </StyledColorButton>
+      </Stack>
+      <StyledColorButton
         sx={{
           marginBottom: "10px",
           marginX: "10px",
@@ -152,7 +103,7 @@ export default function Page() {
         }}
       >
         โพสต์
-      </ColorButton>
-    </Box>
+      </StyledColorButton>
+    </Stack>
   );
 }

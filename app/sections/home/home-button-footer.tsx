@@ -1,22 +1,17 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import { Button, Stack, Typography } from "@mui/material";
 
-export const ButtonFooter = () => {
+function HomeButtonFooter() {
   return (
-    <Box>
-      <Box
+    <>
+      <Stack
         sx={{
-          display: "flex",
-          width: "100%",
           backgroundColor: "#E26385",
           padding: "10px",
           borderRadius: "32px",
         }}
       >
-        <Box
+        <Button
           sx={{
-            display: "flex",
-            width: "100%",
             justifyContent: "center",
             alignItems: "center",
             height: "40px",
@@ -24,11 +19,13 @@ export const ButtonFooter = () => {
             borderRadius: "32px",
           }}
         >
-          <Typography fontSize={"16px"} fontWeight={300} color="#E26385">
+          <Typography fontSize={16} fontWeight={400}>
             เช็คอิน
           </Typography>
-        </Box>
-      </Box>
-    </Box>
+        </Button>
+      </Stack>
+    </>
   );
-};
+}
+
+export default HomeButtonFooter;

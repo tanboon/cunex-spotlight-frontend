@@ -1,0 +1,52 @@
+/* Google Fonts - Noto Sans Thai */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap");
+
+/* Chula Charas Font Family */
+@font-face {
+  font-family: "ChulaCharasNewReg";
+  src: url("/Fonts/ChulaFonts/ChulaCharasNewReg.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ChulaCharasNewBold";
+  src: url("/Fonts/ChulaFonts/ChulaCharasNewBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ChulaCharasNewIta";
+  src: url("/Fonts/ChulaFonts/ChulaCharasNewIta.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ChulaCharasNewBoldIta";
+  src: url("/Fonts/ChulaFonts/ChulaCharasNewBoldIta.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Chulalongkorn Font Family */
+@font-face {
+  font-family: "CHULALONGKORNReg";
+  src: url("/Fonts/ChulaFonts/CHULALONGKORNReg.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CHULALONGKORNBold";
+  src: url("/Fonts/ChulaFonts/CHULALONGKORNBold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ClientProvider } from "./components/providers/ClientProvider";
-import HomeHeader from "./components/Home/Header/HomeHeader";
-import { Box } from "@mui/material";
+
+import HomeHeader from "./sections/home/home-header";
+import ClientProvider from "./components/providers/client-provider";
+import ThemeProvider from "./components/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "CUNEX",
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClientProvider>
-        <body className="max-w-[768px] min-h-screen">
-          <HomeHeader />
-          {children}
-        </body>
+        <ThemeProvider>
+          <body className="max-w-[768px] min-h-screen">
+            <HomeHeader />
+            {children}
+          </body>
+        </ThemeProvider>
       </ClientProvider>
     </html>
   );

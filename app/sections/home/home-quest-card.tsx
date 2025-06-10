@@ -1,13 +1,5 @@
-import {
-  Box,
-  Button,
-  ButtonProps,
-  LinearProgress,
-  linearProgressClasses,
-  styled,
-  Typography,
-} from "@mui/material";
-import React from "react";
+import { Stack, Typography } from "@mui/material";
+import { StyledBorderLinearProgress, StyledButtonQuest } from "./styles";
 
 type QuestType = "walk" | "check-in" | "review";
 
@@ -18,47 +10,24 @@ type QuestCardProps = {
   goal: number;
 };
 
-const iconMap = {
+const ICON_MAP = {
   walk: "/Material/Icon/Group 69.svg",
   "check-in": "/Material/Icon/Group 73.svg",
   review: "/Material/Icon/Group 70.svg",
 };
 
-const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-  color: "#FFFFFF",
-  backgroundColor: "#E26385",
-  "&:hover": {
-    backgroundColor: "#E26385",
-  },
-  borderRadius: "8px",
-}));
-
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: "6px",
-  borderRadius: "28px",
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: "#B5B5B5",
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: "28px",
-    backgroundColor: "#E26385",
-  },
-}));
-
-const QuestCard = ({ name, type, progress, goal }: QuestCardProps) => {
+function HomeQuestCard({ name, type, progress, goal }: QuestCardProps) {
   return (
-    <Box
+    <Stack
+      direction={"row"}
       sx={{
-        display: "flex",
-        flexDirection: "row",
         width: "100%",
         height: "60px",
-        gap: "15px",
       }}
+      spacing={15 / 8}
     >
-      <Box
+      <Stack
         sx={{
-          display: "flex",
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "#D9D9D9",
@@ -67,12 +36,10 @@ const QuestCard = ({ name, type, progress, goal }: QuestCardProps) => {
           height: "60px",
         }}
       >
-        <img src={iconMap[type]} alt="Group 69 Icon" width={36} height={36} />
-      </Box>
-      <Box
+        <img src={ICON_MAP[type]} alt="Group 69 Icon" width={36} height={36} />
+      </Stack>
+      <Stack
         sx={{
-          display: "flex",
-          flexDirection: "column",
           alignItems: "start",
           flex: "1",
           paddingRight: "10px",
@@ -84,20 +51,18 @@ const QuestCard = ({ name, type, progress, goal }: QuestCardProps) => {
         >
           {progress}/{goal}
         </Typography>
-        <BorderLinearProgress
+        <StyledBorderLinearProgress
           variant="determinate"
           value={(progress / goal) * 100}
           sx={{ width: "100%", marginTop: "auto" }}
         />
-      </Box>
-      <Box
+      </Stack>
+      <Stack
         sx={{
-          display: "flex",
-          flexDirection: "column",
           justifyContent: "center",
         }}
       >
-        <ColorButton
+        <StyledButtonQuest
           sx={{
             fontSize: "16px",
             fontWeight: 300,
@@ -108,10 +73,10 @@ const QuestCard = ({ name, type, progress, goal }: QuestCardProps) => {
           }}
         >
           รับรางวัล
-        </ColorButton>
-      </Box>
-    </Box>
+        </StyledButtonQuest>
+      </Stack>
+    </Stack>
   );
-};
+}
 
-export default QuestCard;
+export default HomeQuestCard;

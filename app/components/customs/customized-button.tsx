@@ -7,7 +7,7 @@ type ExtendedButtonProps = ButtonProps & {
   addStartIcon?: boolean;
 };
 
-const CustomizedButton = ({
+function CustomizedButton({
   sx,
   variant,
   title,
@@ -21,7 +21,7 @@ const CustomizedButton = ({
   id,
   testId,
   addStartIcon,
-}: ExtendedButtonProps) => {
+}: ExtendedButtonProps) {
   return (
     <Button
       id={id}
@@ -40,6 +40,6 @@ const CustomizedButton = ({
       {title}
     </Button>
   );
-};
+}
 
 export default CustomizedButton;

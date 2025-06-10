@@ -1,41 +1,13 @@
 "use client";
 
+import ControlledTextField from "@/app/components/controllers/controlled-text-field";
 import { reviewSchema, reviewValidation } from "@/app/schema/reviewSchema";
 import { IReview } from "@/app/types/review";
-import {
-  Avatar,
-  Box,
-  Button,
-  ButtonProps,
-  Rating,
-  styled,
-  Typography,
-} from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useParams } from "next/navigation";
-import { useForm } from "react-hook-form";
 import AddIcon from "@mui/icons-material/Add";
-import ControlledTextField from "@/app/components/Controller/ControlledTextField";
-
-const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-  color: "#FFFFFF",
-  backgroundColor: "#E26385",
-  "&:hover": {
-    backgroundColor: "#E26385",
-  },
-}));
-
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
+import { Avatar, Rating, Stack, Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { StyledButtonReview, StyledInputReview } from "./style";
 
 export default function Page() {
   const { control, setValue } = useForm<IReview>({
@@ -44,46 +16,26 @@ export default function Page() {
     mode: "onChange",
   });
 
-  const params = useParams();
   return (
-    <Box
+    <Stack
       sx={{
-        display: "flex",
-        flexDirection: "column",
         justifyContent: "space-between",
-        width: "100%",
         height: "100vh",
         paddingTop: "112px",
         paddingBottom: "28px",
         paddingX: 2,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          alignItems: "start",
-          gap: "10px",
-        }}
-      >
-        <Box
+      <Stack spacing={1.25}>
+        <Stack
           sx={{
-            display: "flex",
-            flexDirection: "column",
             marginY: "6px",
-            gap: "6px",
           }}
+          spacing={0.75}
         >
-          <Box sx={{ display: "flex", flexDirection: "row", gap: "8px" }}>
-            <Avatar sx={{ width: "35px", height: "35px" }} />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-              }}
-            >
+          <Stack direction="row" spacing={1}>
+            <Avatar sx={{ width: 35, height: 35 }} />
+            <Stack alignItems="start">
               <Typography sx={{ fontSize: "14px", fontWeight: 400 }}>
                 นายสมชาย ใจดี
               </Typography>
@@ -97,25 +49,23 @@ export default function Page() {
               >
                 Student
               </Typography>
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{ display: "flex", width: "100%", justifyContent: "center" }}>
+            </Stack>
+          </Stack>
+        </Stack>
+        <Stack sx={{ alignItems: "center", marginBottom: "20px !important" }}>
           <Rating
             name="review-rating"
             defaultValue={0}
-            sx={{ fontSize: "40px" }}
+            sx={{ fontSize: 40 }}
             onChange={(event, newValue) => {
               if (newValue !== null) {
                 setValue("rate", newValue);
               }
             }}
           />
-        </Box>
-        <Box
+        </Stack>
+        <Stack
           sx={{
-            display: "flex",
-            width: "100%",
             height: "160px",
             marginTop: "10px",
           }}
@@ -136,8 +86,8 @@ export default function Page() {
               style: { padding: "10px" },
             }}
           />
-        </Box>
-        <ColorButton
+        </Stack>
+        <StyledButtonReview
           fullWidth
           variant="contained"
           component="label"
@@ -145,25 +95,14 @@ export default function Page() {
           startIcon={<AddIcon sx={{ width: "15px", height: "15px" }} />}
         >
           เพิ่มรูปภาพ
-          <VisuallyHiddenInput
+          <StyledInputReview
             type="file"
             onChange={(event) => console.log(event.target.files)}
             multiple
           />
-        </ColorButton>
-      </Box>
-      <ColorButton
-        sx={{
-          marginBottom: "10px",
-          marginX: "10px",
-          paddingY: "10px",
-          borderRadius: "20px",
-          fontSize: "18px",
-          fontWeight: 600,
-        }}
-      >
-        โพสต์
-      </ColorButton>
-    </Box>
+        </StyledButtonReview>
+      </Stack>
+      <StyledButtonReview>โพสต์</StyledButtonReview>
+    </Stack>
   );
 }

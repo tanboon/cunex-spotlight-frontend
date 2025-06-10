@@ -1,39 +1,6 @@
-export interface Location {
+export type Location = {
   lat: number;
   lng: number;
-}
-
-export const testAreas: { [key: string]: Location[] } = {
-  banthatthong: [
-    { lat: 13.747526, lng: 100.522853 },
-    { lat: 13.74252, lng: 100.521881 },
-    { lat: 13.742418, lng: 100.522343 },
-    { lat: 13.736104, lng: 100.521209 },
-    { lat: 13.735311, lng: 100.523024 },
-    { lat: 13.737451, lng: 100.523331 },
-    { lat: 13.737224, lng: 100.524895 },
-    { lat: 13.738603, lng: 100.525159 },
-    { lat: 13.739058, lng: 100.522216 },
-    { lat: 13.740664, lng: 100.522514 },
-    { lat: 13.740479, lng: 100.523829 },
-    { lat: 13.747164, lng: 100.524896 },
-  ],
-  roiPeeGarden: [
-    { lat: 13.740664, lng: 100.522514 },
-    { lat: 13.739058, lng: 100.522216 },
-    { lat: 13.738603, lng: 100.525159 },
-    { lat: 13.739772, lng: 100.525363 },
-    { lat: 13.73999, lng: 100.523884 },
-    { lat: 13.740448, lng: 100.52394 },
-  ],
-  suanLuangSquare: [
-    { lat: 13.743749, lng: 100.52432 },
-    { lat: 13.740479, lng: 100.523829 },
-    { lat: 13.740448, lng: 100.52394 },
-    { lat: 13.73999, lng: 100.523884 },
-    { lat: 13.739772, lng: 100.525363 },
-    { lat: 13.743462, lng: 100.526034 },
-  ],
 };
 
 export const areas: { [key: string]: Location[] } = {

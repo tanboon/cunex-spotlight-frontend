@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-export const TreasureIcon = () => {
+function HomeTreasureIcon() {
   return (
     <Box
       sx={{ padding: "14px", backgroundColor: "#ffffff", borderRadius: "32px" }}
@@ -11,11 +11,14 @@ export const TreasureIcon = () => {
         src={"/Material/Icon/Treasure_Chest.svg"}
         alt={"Treasure Chest"}
         sx={{
-          width: "100%",
-          height: "100%",
+          width: 28,
+          height: 28,
           objectFit: "contain",
+          backgroundColor: (theme) => theme.palette.common.white,
         }}
       />
     </Box>
   );
-};
+}
+
+export default HomeTreasureIcon;

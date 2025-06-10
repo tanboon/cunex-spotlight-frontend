@@ -1,35 +1,24 @@
 "use client";
 
-import { reviewSchema, reviewValidation } from "@/app/schema/reviewSchema";
-import { IReview } from "@/app/types/review";
+import { mockReviewData } from "@/app/constant/mock-review-data";
 import {
   Avatar,
   Box,
-  Button,
-  ButtonProps,
   Divider,
   IconButton,
-  Rating,
-  styled,
+  Stack,
   Tabs,
   Typography,
 } from "@mui/material";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useParams, useRouter } from "next/navigation";
-import { set, useForm } from "react-hook-form";
 import Tab from "@mui/material/Tab";
-import { useState } from "react";
 import { X } from "lucide-react";
-import { mockReviewData } from "@/app/components/Review/ReviewBottomSheet";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
+
+const FULL_TEXT = `คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย เป็นคณะวิศวกรรมศาสตร์ในประเทศไทยที่เก่าแก่ที่สุด และเป็น 1 ใน 4 คณะแรกตั้งของจุฬาลงกรณ์มหาวิทยาลัย ถือกำเนิดมาจากโรงเรียนยันตรศึกษาแห่งโรงเรียนข้าราชการพลเรือนของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว ถือเป็นคณะที่มีจำนวนรุ่นมากที่สุดในจุฬาลงกรณ์มหาวิทยาลัย โดยในปีการศึกษา 2567 เป็นรุ่นที่ 108 คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย มีหน้าที่หลักในการผลิตบัณฑิตวิศวกรรมศาสตร์ทั้งในระดับปริญญาบัณฑิตและบัณฑิตศึกษา ศึกษาวิจัยและพัฒนาองค์ความรู้ทางวิศวกรรมศาสตร์และเผยแพร่องค์ความรู้สู่ประชาชนทั่วไป เพื่อเป็นที่พึ่งพิงทางวิชาการให้กับประเทศ มีงานวิจัยและความร่วมมือทางวิชาการซึ่งเป็นที่ยอมรับในระดับชาติและระดับนานาชาติ ปัจจุบันมีภาควิชาทั้งหมด 12 ภาควิชาและหน่วยงานเทียบเท่าภาควิชาอีก 2 หน่วยงาน นิสิตคณะวิศวกรรมศาสตร์ มักเรียกแทนตัวเองว่า "อินทาเนีย" - คณะวิศวกรรมศาสตร์ตั้งอยู่ในพื้นที่จุฬาลงกรณ์มหาวิทยาลัยฝั่งถนนอังรีดูนังต์ ด้านข้างหอประชุมจุฬาลงกรณ์มหาวิทยาลัย`;
+const TRUNCATED_TEXT = FULL_TEXT.substring(0, 500);
 
 export default function Page() {
-  const { control, setValue } = useForm<IReview>({
-    defaultValues: reviewSchema,
-    resolver: yupResolver(reviewValidation),
-    mode: "onChange",
-  });
-
   const [tab, setTab] = useState(0);
   const [expanded, setExpanded] = useState(false);
 
@@ -44,16 +33,9 @@ export default function Page() {
   const params = useParams();
   const router = useRouter();
 
-  const fullText = `คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย เป็นคณะวิศวกรรมศาสตร์ในประเทศไทยที่เก่าแก่ที่สุด และเป็น 1 ใน 4 คณะแรกตั้งของจุฬาลงกรณ์มหาวิทยาลัย ถือกำเนิดมาจากโรงเรียนยันตรศึกษาแห่งโรงเรียนข้าราชการพลเรือนของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว ถือเป็นคณะที่มีจำนวนรุ่นมากที่สุดในจุฬาลงกรณ์มหาวิทยาลัย โดยในปีการศึกษา 2567 เป็นรุ่นที่ 108 คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย มีหน้าที่หลักในการผลิตบัณฑิตวิศวกรรมศาสตร์ทั้งในระดับปริญญาบัณฑิตและบัณฑิตศึกษา ศึกษาวิจัยและพัฒนาองค์ความรู้ทางวิศวกรรมศาสตร์และเผยแพร่องค์ความรู้สู่ประชาชนทั่วไป เพื่อเป็นที่พึ่งพิงทางวิชาการให้กับประเทศ มีงานวิจัยและความร่วมมือทางวิชาการซึ่งเป็นที่ยอมรับในระดับชาติและระดับนานาชาติ ปัจจุบันมีภาควิชาทั้งหมด 12 ภาควิชาและหน่วยงานเทียบเท่าภาควิชาอีก 2 หน่วยงาน นิสิตคณะวิศวกรรมศาสตร์ มักเรียกแทนตัวเองว่า "อินทาเนีย" - คณะวิศวกรรมศาสตร์ตั้งอยู่ในพื้นที่จุฬาลงกรณ์มหาวิทยาลัยฝั่งถนนอังรีดูนังต์ ด้านข้างหอประชุมจุฬาลงกรณ์มหาวิทยาลัย`;
-
-  const truncatedText = fullText.substring(0, 500);
-
   return (
-    <Box
+    <Stack
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
         height: "100vh",
         paddingTop: "112px",
         paddingBottom: "28px",
@@ -61,20 +43,10 @@ export default function Page() {
         justifyContent: "space-between",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          alignItems: "start",
-          gap: "10px",
-        }}
-      >
-        <Box
+      <Stack spacing={1.25}>
+        <Stack
+          direction={"row"}
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            width: "100%",
             alignItems: "center",
             justifyContent: "space-between",
           }}
@@ -90,7 +62,7 @@ export default function Page() {
           >
             <X strokeWidth={"1px"} />
           </IconButton>
-        </Box>
+        </Stack>
         <Box sx={{ width: "100%", height: "220px", marginTop: "10px" }}>
           <img
             src="/Picture/building_2.jpg"
@@ -133,7 +105,7 @@ export default function Page() {
               fontWeight: 300,
             }}
           >
-            {expanded ? fullText : truncatedText}
+            {expanded ? FULL_TEXT : TRUNCATED_TEXT}
             <u
               onClick={toggleReadMore}
               style={{
@@ -145,46 +117,24 @@ export default function Page() {
             </u>
           </Typography>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100%",
-            width: "100%",
-          }}
-          hidden={tab !== 1}
-        >
+        <Stack hidden={tab !== 1}>
           <Box sx={{ width: "100%", height: "330px", overflow: "auto" }}>
             {mockReviewData.map((review, index) => (
-              <Box
+              <Stack
                 key={index}
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                  alignItems: "start",
                   marginTop: index !== 0 ? "6px" : 0,
                 }}
               >
-                <Box
+                <Stack
                   sx={{
-                    display: "flex",
-                    flexDirection: "column",
                     marginY: "6px",
-                    gap: "6px",
                   }}
+                  spacing={6 / 8}
                 >
-                  <Box
-                    sx={{ display: "flex", flexDirection: "row", gap: "8px" }}
-                  >
+                  <Stack direction={"row"} spacing={1}>
                     <Avatar sx={{ width: "35px", height: "35px" }} />
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "start",
-                      }}
-                    >
+                    <Stack>
                       <Typography sx={{ fontSize: "14px", fontWeight: 400 }}>
                         {review.name}
                       </Typography>
@@ -198,8 +148,8 @@ export default function Page() {
                       >
                         {review.role}
                       </Typography>
-                    </Box>
-                  </Box>
+                    </Stack>
+                  </Stack>
                   <Typography
                     sx={{
                       fontSize: "12px",
@@ -211,30 +161,26 @@ export default function Page() {
                   >
                     {review.review}
                   </Typography>
-                </Box>
+                </Stack>
                 <Divider
                   sx={{ width: "100%", color: "#EAEAEA", marginTop: "4px" }}
                 />
-              </Box>
+              </Stack>
             ))}
           </Box>
-        </Box>
-      </Box>
-      <Box
+        </Stack>
+      </Stack>
+      <Stack
         hidden={tab !== 1}
         sx={{
-          display: "flex",
-          width: "100%",
           backgroundColor: "#E26385",
           padding: "10px",
           borderRadius: "32px",
           marginBottom: "20px",
         }}
       >
-        <Box
+        <Stack
           sx={{
-            display: "flex",
-            width: "100%",
             justifyContent: "center",
             alignItems: "center",
             height: "40px",
@@ -248,8 +194,8 @@ export default function Page() {
           <Typography fontSize={"16px"} fontWeight={300} color="#E26385">
             เช็คอิน
           </Typography>
-        </Box>
-      </Box>
-    </Box>
+        </Stack>
+      </Stack>
+    </Stack>
   );
 }

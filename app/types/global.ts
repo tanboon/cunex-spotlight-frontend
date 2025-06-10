@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
-export interface IBreadcrumbsAndMenu {
+export type IBreadcrumbsAndMenu = {
   name: string;
   to?: string;
   icon?: ReactNode;
-}
+};

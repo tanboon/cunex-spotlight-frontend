@@ -1,27 +1,10 @@
-import { styled, TextField, TextFieldProps } from "@mui/material";
+import { TextFieldProps } from "@mui/material";
 import { forwardRef } from "react";
+import { StyledTextField } from "./style";
 
 type ExtendedTextFieldProps = TextFieldProps & {
   testId?: string;
 };
-
-const StyledTextField = styled(TextField)<TextFieldProps>(
-  ({ theme, error }) => ({
-    ...{
-      "& .MuiOutlinedInput-root": {
-        overflow: "hidden",
-        "&.Mui-focused fieldset": {
-          borderColor: "#E26385",
-        },
-        color: "#929292",
-      },
-
-      "& .Mui-disabled .MuiOutlinedInput-notchedOutline": {
-        borderColor: error && theme.palette.error.main,
-      },
-    },
-  })
-);
 
 const CustomizedTextField = forwardRef<
   HTMLInputElement,

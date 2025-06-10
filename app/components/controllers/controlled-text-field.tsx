@@ -1,6 +1,6 @@
 import { TextFieldProps } from "@mui/material";
 import { Control, Controller } from "react-hook-form";
-import CustomizedTextField from "../Custom/CustomizedTextField";
+import CustomizedTextField from "../customs/customized-text-field";
 
 type ExtendedTextFieldProps = {
   name: string;
@@ -30,7 +30,7 @@ type ExtendedTextFieldProps = {
   placeholder?: TextFieldProps["placeholder"];
 };
 
-const ControlledTextField = ({
+function ControlledTextField({
   name,
   label,
   control,
@@ -52,7 +52,7 @@ const ControlledTextField = ({
   onKeyDown,
   allowNegativeNumber,
   placeholder,
-}: ExtendedTextFieldProps) => {
+}: ExtendedTextFieldProps) {
   return (
     <Controller
       key={`${name}-text-field`}
@@ -95,6 +95,6 @@ const ControlledTextField = ({
       )}
     />
   );
-};
+}
 
 export default ControlledTextField;
