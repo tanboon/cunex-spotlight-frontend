@@ -38,7 +38,7 @@ function HomeHeader() {
 
       <Box
         component="img"
-        src="/material/CUNEX.svg"
+        src="/Material/CUNEX.svg"
         alt="CUNEX Logo"
         sx={{
           width: "108px",

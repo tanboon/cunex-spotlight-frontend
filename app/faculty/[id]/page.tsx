@@ -1,26 +1,23 @@
 "use client";
 
+import CancelIcon from "@/app/components/icons/cancel-icon";
 import { mockReviewData } from "@/app/constant/mock-review-data";
-import {
-  Avatar,
-  Box,
-  Divider,
-  IconButton,
-  Stack,
-  Tabs,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Divider, Stack, Tabs, Typography } from "@mui/material";
 import Tab from "@mui/material/Tab";
-import { X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-
-const FULL_TEXT = `คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย เป็นคณะวิศวกรรมศาสตร์ในประเทศไทยที่เก่าแก่ที่สุด และเป็น 1 ใน 4 คณะแรกตั้งของจุฬาลงกรณ์มหาวิทยาลัย ถือกำเนิดมาจากโรงเรียนยันตรศึกษาแห่งโรงเรียนข้าราชการพลเรือนของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว ถือเป็นคณะที่มีจำนวนรุ่นมากที่สุดในจุฬาลงกรณ์มหาวิทยาลัย โดยในปีการศึกษา 2567 เป็นรุ่นที่ 108 คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย มีหน้าที่หลักในการผลิตบัณฑิตวิศวกรรมศาสตร์ทั้งในระดับปริญญาบัณฑิตและบัณฑิตศึกษา ศึกษาวิจัยและพัฒนาองค์ความรู้ทางวิศวกรรมศาสตร์และเผยแพร่องค์ความรู้สู่ประชาชนทั่วไป เพื่อเป็นที่พึ่งพิงทางวิชาการให้กับประเทศ มีงานวิจัยและความร่วมมือทางวิชาการซึ่งเป็นที่ยอมรับในระดับชาติและระดับนานาชาติ ปัจจุบันมีภาควิชาทั้งหมด 12 ภาควิชาและหน่วยงานเทียบเท่าภาควิชาอีก 2 หน่วยงาน นิสิตคณะวิศวกรรมศาสตร์ มักเรียกแทนตัวเองว่า "อินทาเนีย" - คณะวิศวกรรมศาสตร์ตั้งอยู่ในพื้นที่จุฬาลงกรณ์มหาวิทยาลัยฝั่งถนนอังรีดูนังต์ ด้านข้างหอประชุมจุฬาลงกรณ์มหาวิทยาลัย`;
-const TRUNCATED_TEXT = FULL_TEXT.substring(0, 500);
+import FacultyDetails from "./constants/faculty-detail";
+import { TFaculty } from "./types";
 
 export default function Page() {
+  const params = useParams<{ id: string }>();
+  const router = useRouter();
   const [tab, setTab] = useState(0);
   const [expanded, setExpanded] = useState(false);
+
+  const facultyDetail: TFaculty = FacultyDetails[parseInt(params.id)];
+  const fullText = facultyDetail.detail;
+  const truncatedText = facultyDetail.detail.substring(0, 500);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
@@ -30,8 +27,9 @@ export default function Page() {
     setExpanded(!expanded);
   };
 
-  const params = useParams();
-  const router = useRouter();
+  if (!facultyDetail) {
+    return "";
+  }
 
   return (
     <Stack
@@ -52,20 +50,16 @@ export default function Page() {
           }}
         >
           <Typography sx={{ fontSize: "20px", fontWeight: 300 }}>
-            คณะวิศวกรรมศาสตร์
+            {facultyDetail.name}
           </Typography>
-          <IconButton
+          <CancelIcon
             sx={{ padding: "1px", border: "1px solid #666666" }}
-            onClick={() => {
-              router.back();
-            }}
-          >
-            <X strokeWidth={"1px"} />
-          </IconButton>
+            onClick={() => router.back()}
+          />
         </Stack>
         <Box sx={{ width: "100%", height: "220px", marginTop: "10px" }}>
           <img
-            src="/Picture/building_2.jpg"
+            src={facultyDetail.image}
             style={{
               width: "100%",
               height: "100%",
@@ -105,7 +99,7 @@ export default function Page() {
               fontWeight: 300,
             }}
           >
-            {expanded ? FULL_TEXT : TRUNCATED_TEXT}
+            {expanded ? fullText : truncatedText}
             <u
               onClick={toggleReadMore}
               style={{

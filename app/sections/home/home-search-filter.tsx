@@ -8,11 +8,11 @@ import CustomizeSearchFilterIcon from "@/app/components/customs/customized-searc
 import { useBoolean } from "@/app/hooks/use-boolean";
 
 const SEARCH_FILTER = [
-  { text: "อาคาร", iconPath: "/material/icon/Building.svg" },
-  { text: "Co-working space", iconPath: "/material/icon/Meeting_Room.svg" },
-  { text: "ร้านอาหาร", iconPath: "/material/icon/Restaurant.svg" },
-  { text: "ห้องน้ำ", iconPath: "/material/icon/Toilet.svg" },
-  { text: "ตู้กดน้ำ", iconPath: "/material/icon/Water_Cooler.svg" },
+  { text: "อาคาร", iconPath: "/Material/Icon/Building.svg" },
+  { text: "Co-working space", iconPath: "/Material/Icon/Meeting_Room.svg" },
+  { text: "ร้านอาหาร", iconPath: "/Material/Icon/Restaurant.svg" },
+  { text: "ห้องน้ำ", iconPath: "/Material/Icon/Toilet.svg" },
+  { text: "ตู้กดน้ำ", iconPath: "/Material/Icon/Water_Cooler.svg" },
 ];
 
 function HomeSearchFilter() {

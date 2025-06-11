@@ -8,7 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Avatar, Stack, Typography } from "@mui/material";
 
 import { useForm } from "react-hook-form";
-import { StyledColorButton, StyledVisuallyHiddenInput } from "../style";
+import { StyledColorButton, StyledVisuallyHiddenInput } from "../styles";
 
 export default function Page() {
   const { control } = useForm<IReview>({

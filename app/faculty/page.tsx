@@ -3,7 +3,7 @@ import CustomizedSearchBar from "../components/customs/customzied-search-bar";
 
 export default function Page() {
   return (
-    <Stack sx={{ marginTop: 12.5, border: "1px solid #000000" }}>
+    <Stack sx={{ paddingX: 1.5, marginTop: 13 }}>
       <CustomizedSearchBar />
     </Stack>
   );
